@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Anonymous" />
+<meta name="author" content="Samangi Wadinambiarachchi, Ryan M. Kelly, Saumya Pareek, Qiushi Zhou, Eduardo Velloso" />
 
 <meta name="date" content="2023-09-21" />
 
@@ -424,28 +424,28 @@ data_dfs &lt;- read.csv(&quot;data_dfs.csv&quot;)</code></pre>
 <div id="modelling" class="section level3 unnumbered">
 <h3 class="unnumbered">Modelling</h3>
 <pre class="r"><code>summary(mDFSBinom, prob = .89)</code></pre>
-<pre><code>##  Family: binomial 
-##   Links: mu = probit 
-## Formula: dfs_count | trials(14) ~ 1 + Condition + (1 | id) + (1 | img_id) 
-##    Data: dat2 (Number of observations: 554) 
+<pre><code>##  Family: binomial
+##   Links: mu = probit
+## Formula: dfs_count | trials(14) ~ 1 + Condition + (1 | id) + (1 | img_id)
+##    Data: dat2 (Number of observations: 554)
 ##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
 ##          total post-warmup draws = 8000
-## 
-## Group-Level Effects: 
-## ~id (Number of levels: 60) 
+##
+## Group-Level Effects:
+## ~id (Number of levels: 60)
 ##               Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## sd(Intercept)     0.35      0.05     0.28     0.43 1.00     3490     5060
-## 
-## ~img_id (Number of levels: 277) 
+##
+## ~img_id (Number of levels: 277)
 ##               Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## sd(Intercept)     0.37      0.03     0.32     0.41 1.00     3205     5450
-## 
-## Population-Level Effects: 
+##
+## Population-Level Effects:
 ##                     Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## Intercept              -0.71      0.10    -0.86    -0.56 1.00     4499     5105
 ## ConditionGISsupport     0.27      0.14     0.05     0.48 1.00     4423     5378
 ## ConditionAISupport      0.32      0.13     0.11     0.54 1.00     4590     5240
-## 
+##
 ## Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
@@ -483,15 +483,15 @@ colors &lt;- c(&quot;#8077B0&quot;,&quot;#1C9099&quot;,&quot;#E8598A&quot;)
 
 ggplot(ce, aes(x = effect1__, y = estimate__, col = effect1__))+
   geom_point(position = position_dodge(.6),size=3)+
-  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col = effect1__),      
+  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col = effect1__),
                 width = .5, position = position_dodge(.6),size=1)+
   scale_color_manual(values = colors) +
-  theme_minimal() + 
+  theme_minimal() +
   theme(
     plot.title = element_text(face = &quot;bold&quot;, size = 20),
     legend.background = element_rect(
-      fill = &quot;white&quot;, 
-      linewidth = 4, 
+      fill = &quot;white&quot;,
+      linewidth = 4,
       colour = &quot;white&quot;
     ),
     legend.position=&quot;none&quot;,
@@ -526,15 +526,15 @@ data_fluency &lt;- read.csv(&quot;data_demographics_updated.csv&quot;)</code></p
 <div id="modelling-1" class="section level3 unnumbered">
 <h3 class="unnumbered">Modelling</h3>
 <pre class="r"><code>summary(mFluency, prob = .89)</code></pre>
-<pre><code>##  Family: negbinomial 
-##   Links: mu = log; shape = log 
-## Formula: fluency_corrected ~ 1 + Condition 
+<pre><code>##  Family: negbinomial
+##   Links: mu = log; shape = log
+## Formula: fluency_corrected ~ 1 + Condition
 ##          shape ~ 1 + Condition
-##    Data: data_fluency (Number of observations: 60) 
+##    Data: data_fluency (Number of observations: 60)
 ##   Draws: 4 chains, each with iter = 3000; warmup = 1500; thin = 1;
 ##          total post-warmup draws = 6000
-## 
-## Population-Level Effects: 
+##
+## Population-Level Effects:
 ##                           Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS
 ## Intercept                     1.50      0.19     1.20     1.81 1.00     4846
 ## shape_Intercept               0.77      0.46     0.07     1.51 1.00     6286
@@ -549,20 +549,20 @@ data_fluency &lt;- read.csv(&quot;data_demographics_updated.csv&quot;)</code></p
 ## ConditionAISupport            3958
 ## shape_ConditionGISsupport     3203
 ## shape_ConditionAISupport      4174
-## 
+##
 ## Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre class="r"><code>summary(mFluencyTotal, prob = .89)</code></pre>
-<pre><code>##  Family: negbinomial 
-##   Links: mu = log; shape = log 
-## Formula: fluency_corrected ~ 1 + Condition + offset(log(ToT)) 
+<pre><code>##  Family: negbinomial
+##   Links: mu = log; shape = log
+## Formula: fluency_corrected ~ 1 + Condition + offset(log(ToT))
 ##          shape ~ 1 + Condition
-##    Data: data_fluency (Number of observations: 60) 
+##    Data: data_fluency (Number of observations: 60)
 ##   Draws: 4 chains, each with iter = 3000; warmup = 1500; thin = 1;
 ##          total post-warmup draws = 6000
-## 
-## Population-Level Effects: 
+##
+## Population-Level Effects:
 ##                           Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS
 ## Intercept                    -1.48      0.19    -1.79    -1.17 1.00     4674
 ## shape_Intercept               0.75      0.45     0.04     1.47 1.00     6568
@@ -577,7 +577,7 @@ data_fluency &lt;- read.csv(&quot;data_demographics_updated.csv&quot;)</code></p
 ## ConditionAISupport            4368
 ## shape_ConditionGISsupport     2880
 ## shape_ConditionAISupport      4864
-## 
+##
 ## Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
@@ -592,7 +592,7 @@ data_fluency &lt;- read.csv(&quot;data_demographics_updated.csv&quot;)</code></p
 ## 1 (ConditionAISupport) &lt; 0    -0.21      0.30     -0.7     0.28       3.20
 ## 2 (ConditionGISsupp... &lt; 0    -0.49      0.25     -0.9    -0.10      46.62
 ##   Post.Prob Star
-## 1      0.76     
+## 1      0.76
 ## 2      0.98    *
 ## ---
 ## &#39;CI&#39;: 90%-CI for one-sided and 95%-CI for two-sided hypotheses.
@@ -607,8 +607,8 @@ data_fluency &lt;- read.csv(&quot;data_demographics_updated.csv&quot;)</code></p
 ## 1 (ConditionAISupport) &lt; 0     0.10      0.31    -0.41     0.60       0.61
 ## 2 (ConditionGISsupp... &lt; 0    -0.22      0.25    -0.64     0.19       4.20
 ##   Post.Prob Star
-## 1      0.38     
-## 2      0.81     
+## 1      0.38
+## 2      0.81
 ## ---
 ## &#39;CI&#39;: 90%-CI for one-sided and 95%-CI for two-sided hypotheses.
 ## &#39;*&#39;: For one-sided hypotheses, the posterior probability exceeds 95%;
@@ -624,15 +624,15 @@ colors &lt;- c(&quot;#8077B0&quot;,&quot;#1C9099&quot;,&quot;#E8598A&quot;)
 
 ggplot(ce, aes(x = effect1__, y = estimate__, col = effect1__))+
   geom_point(position = position_dodge(.6),size=3)+
-  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col = effect1__),      
+  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col = effect1__),
                 width = .5, position = position_dodge(.6),size=1)+
   scale_color_manual(values = colors) +
-  theme_minimal() + 
+  theme_minimal() +
   theme(
     plot.title = element_text(face = &quot;bold&quot;, size = 20),
     legend.background = element_rect(
-      fill = &quot;white&quot;, 
-      linewidth = 4, 
+      fill = &quot;white&quot;,
+      linewidth = 4,
       colour = &quot;white&quot;
     ),
     legend.position=&quot;none&quot;,
@@ -664,45 +664,45 @@ variety &lt;- read.csv(&quot;data_variety.csv&quot;)</code></pre>
 <div id="modelling-2" class="section level3 unnumbered">
 <h3 class="unnumbered">Modelling</h3>
 <pre class="r"><code>summary(mVar, prob = .89)</code></pre>
-<pre><code>##  Family: negbinomial 
-##   Links: mu = log; shape = identity 
-## Formula: variety_count ~ 1 + Condition + fluency 
-##    Data: data_variety (Number of observations: 60) 
+<pre><code>##  Family: negbinomial
+##   Links: mu = log; shape = identity
+## Formula: variety_count ~ 1 + Condition + fluency
+##    Data: data_variety (Number of observations: 60)
 ##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
 ##          total post-warmup draws = 8000
-## 
-## Population-Level Effects: 
+##
+## Population-Level Effects:
 ##                     Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## Intercept              -0.00      0.23    -0.38     0.36 1.00     6029     4834
 ## ConditionGISsupport     0.02      0.25    -0.38     0.42 1.00     7325     5594
 ## ConditionAISupport     -0.15      0.24    -0.53     0.23 1.00     7072     5602
 ## fluency                 0.14      0.02     0.11     0.18 1.00     5680     4486
-## 
-## Family Specific Parameters: 
+##
+## Family Specific Parameters:
 ##       Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## shape    32.87     43.60     5.09   105.97 1.00     6019     5738
-## 
+##
 ## Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre class="r"><code>summary(mVarTotal, prob = .89)</code></pre>
-<pre><code>##  Family: negbinomial 
-##   Links: mu = log; shape = identity 
-## Formula: variety_count ~ 1 + Condition 
-##    Data: data_variety (Number of observations: 60) 
+<pre><code>##  Family: negbinomial
+##   Links: mu = log; shape = identity
+## Formula: variety_count ~ 1 + Condition
+##    Data: data_variety (Number of observations: 60)
 ##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
 ##          total post-warmup draws = 8000
-## 
-## Population-Level Effects: 
+##
+## Population-Level Effects:
 ##                     Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## Intercept               1.00      0.19     0.71     1.30 1.00     5838     5234
 ## ConditionGISsupport    -0.39      0.28    -0.84     0.06 1.00     6211     5257
 ## ConditionAISupport     -0.29      0.28    -0.74     0.17 1.00     6697     5373
-## 
-## Family Specific Parameters: 
+##
+## Family Specific Parameters:
 ##       Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## shape     3.68      3.05     1.58     7.43 1.00     5699     3129
-## 
+##
 ## Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
@@ -717,8 +717,8 @@ variety &lt;- read.csv(&quot;data_variety.csv&quot;)</code></pre>
 ## 1 (ConditionAISupport) &lt; 0    -0.15      0.24    -0.55     0.24       2.64
 ## 2 (ConditionGISsupp... &lt; 0     0.02      0.25    -0.39     0.43       0.87
 ##   Post.Prob Star
-## 1      0.73     
-## 2      0.46     
+## 1      0.73
+## 2      0.46
 ## ---
 ## &#39;CI&#39;: 90%-CI for one-sided and 95%-CI for two-sided hypotheses.
 ## &#39;*&#39;: For one-sided hypotheses, the posterior probability exceeds 95%;
@@ -732,8 +732,8 @@ variety &lt;- read.csv(&quot;data_variety.csv&quot;)</code></pre>
 ## 1 (ConditionAISupport) &lt; 0    -0.29      0.28    -0.76     0.18       5.71
 ## 2 (ConditionGISsupp... &lt; 0    -0.39      0.28    -0.86     0.07      10.66
 ##   Post.Prob Star
-## 1      0.85     
-## 2      0.91     
+## 1      0.85
+## 2      0.91
 ## ---
 ## &#39;CI&#39;: 90%-CI for one-sided and 95%-CI for two-sided hypotheses.
 ## &#39;*&#39;: For one-sided hypotheses, the posterior probability exceeds 95%;
@@ -753,15 +753,15 @@ colors &lt;- c(&quot;#8077B0&quot;,&quot;#1C9099&quot;,&quot;#E8598A&quot;)
 
 ggplot(ce, aes(x = effect1__,  y = estimate__, col = effect1__))+
   geom_point(position = position_dodge(.6),size=3)+
-  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col = effect1__),      
+  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col = effect1__),
                 width = .5, position = position_dodge(.6),size=1)+
   scale_color_manual(values = colors) +
-  theme_minimal() + 
+  theme_minimal() +
   theme(
     plot.title = element_text(face = &quot;bold&quot;, size = 20),
     legend.background = element_rect(
-      fill = &quot;white&quot;, 
-      linewidth = 4, 
+      fill = &quot;white&quot;,
+      linewidth = 4,
       colour = &quot;white&quot;
     ),
     legend.position=&quot;none&quot;,
@@ -793,55 +793,55 @@ data_originality &lt;- read_csv(&quot;data_originality.csv&quot;)</code></pre>
 <div id="modelling-3" class="section level3 unnumbered">
 <h3 class="unnumbered">Modelling</h3>
 <pre class="r"><code>summary(mOrig, prob = .89)</code></pre>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: o_score ~ 1 + Condition + Variety + (1 | id) 
-##    Data: data_originality (Number of observations: 277) 
+<pre><code>##  Family: gaussian
+##   Links: mu = identity; sigma = identity
+## Formula: o_score ~ 1 + Condition + Variety + (1 | id)
+##    Data: data_originality (Number of observations: 277)
 ##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
 ##          total post-warmup draws = 8000
-## 
-## Group-Level Effects: 
-## ~id (Number of levels: 60) 
+##
+## Group-Level Effects:
+## ~id (Number of levels: 60)
 ##               Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## sd(Intercept)     0.02      0.01     0.00     0.03 1.00     1585     2400
-## 
-## Population-Level Effects: 
+##
+## Population-Level Effects:
 ##                     Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## Intercept               0.83      0.02     0.81     0.86 1.00     6133     5079
 ## ConditionGISsupport    -0.01      0.02    -0.03     0.02 1.00     6045     4856
 ## ConditionAISupport     -0.03      0.02    -0.05    -0.01 1.00     4956     4753
 ## Variety                 0.01      0.00     0.00     0.01 1.00     6929     4817
-## 
-## Family Specific Parameters: 
+##
+## Family Specific Parameters:
 ##       Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## sigma     0.09      0.00     0.08     0.10 1.00     5511     5601
-## 
+##
 ## Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre class="r"><code>summary(mOrigTotal, prob = .89)</code></pre>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: o_score ~ 1 + Condition + (1 | id) 
-##    Data: data_originality (Number of observations: 277) 
+<pre><code>##  Family: gaussian
+##   Links: mu = identity; sigma = identity
+## Formula: o_score ~ 1 + Condition + (1 | id)
+##    Data: data_originality (Number of observations: 277)
 ##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
 ##          total post-warmup draws = 8000
-## 
-## Group-Level Effects: 
-## ~id (Number of levels: 60) 
+##
+## Group-Level Effects:
+## ~id (Number of levels: 60)
 ##               Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## sd(Intercept)     0.02      0.01     0.01     0.04 1.00     1710     2080
-## 
-## Population-Level Effects: 
+##
+## Population-Level Effects:
 ##                     Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## Intercept               0.86      0.01     0.84     0.88 1.00     4742     4834
 ## ConditionGISsupport    -0.01      0.02    -0.04     0.01 1.00     6080     5526
 ## ConditionAISupport     -0.03      0.02    -0.06    -0.00 1.00     5690     4458
-## 
-## Family Specific Parameters: 
+##
+## Family Specific Parameters:
 ##       Estimate Est.Error l-89% CI u-89% CI Rhat Bulk_ESS Tail_ESS
 ## sigma     0.09      0.00     0.08     0.10 1.00     5975     5449
-## 
+##
 ## Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
@@ -857,7 +857,7 @@ data_originality &lt;- read_csv(&quot;data_originality.csv&quot;)</code></pre>
 ## 2 (ConditionGISsupp... &lt; 0    -0.01      0.02    -0.03     0.02       1.97
 ##   Post.Prob Star
 ## 1      0.97    *
-## 2      0.66     
+## 2      0.66
 ## ---
 ## &#39;CI&#39;: 90%-CI for one-sided and 95%-CI for two-sided hypotheses.
 ## &#39;*&#39;: For one-sided hypotheses, the posterior probability exceeds 95%;
@@ -872,7 +872,7 @@ data_originality &lt;- read_csv(&quot;data_originality.csv&quot;)</code></pre>
 ## 2 (ConditionGISsupp... &lt; 0    -0.01      0.02    -0.04     0.01       3.94
 ##   Post.Prob Star
 ## 1      0.97    *
-## 2      0.80     
+## 2      0.80
 ## ---
 ## &#39;CI&#39;: 90%-CI for one-sided and 95%-CI for two-sided hypotheses.
 ## &#39;*&#39;: For one-sided hypotheses, the posterior probability exceeds 95%;
@@ -889,15 +889,15 @@ colors &lt;- c(&quot;#8077B0&quot;,&quot;#1C9099&quot;,&quot;#E8598A&quot;)
 
 ggplot(ce, aes(x = effect1__,  y = estimate__, col = effect1__))+
   geom_point(position = position_dodge(.6),size=3)+
-  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col= effect1__),      
+  geom_errorbar(aes(ymin = estimate__-se__, ymax = estimate__+se__, col= effect1__),
                 width = .5, position = position_dodge(.6),size=1)+
   scale_color_manual(values = colors) +
-  theme_minimal() + 
+  theme_minimal() +
   theme(
     plot.title = element_text(face = &quot;bold&quot;, size = 20),
     legend.background = element_rect(
-      fill = &quot;white&quot;, 
-      linewidth = 4, 
+      fill = &quot;white&quot;,
+      linewidth = 4,
       colour = &quot;white&quot;
     ),
     legend.position=&quot;none&quot;,
@@ -931,15 +931,15 @@ AI_Img_DFS_correlation &lt;-read.csv(&quot;AI_Img_DFS_correlation.csv&quot;)</co
 <div id="testing-for-normality" class="section level3 unnumbered">
 <h3 class="unnumbered">Testing for normality</h3>
 <pre class="r"><code>shapiro.test(data$similarity)</code></pre>
-<pre><code>## 
+<pre><code>##
 ##  Shapiro-Wilk normality test
-## 
+##
 ## data:  data$similarity
 ## W = 0.90289, p-value = 1.296e-05</code></pre>
 <pre class="r"><code>shapiro.test(data$dfs)</code></pre>
-<pre><code>## 
+<pre><code>##
 ##  Shapiro-Wilk normality test
-## 
+##
 ## data:  data$dfs
 ## W = 0.97125, p-value = 0.0623</code></pre>
 </div>
@@ -948,14 +948,14 @@ AI_Img_DFS_correlation &lt;-read.csv(&quot;AI_Img_DFS_correlation.csv&quot;)</co
 <pre class="r"><code>corr2 &lt;- cor.test(x=data$similarity, y=data$dfs, method = &#39;spearman&#39;,exact=FALSE)
 
 corr2</code></pre>
-<pre><code>## 
+<pre><code>##
 ##  Spearman&#39;s rank correlation rho
-## 
+##
 ## data:  data$similarity and data$dfs
 ## S = 40141, p-value = 3.646e-08
 ## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
-##       rho 
+##       rho
 ## 0.5631203</code></pre>
 </div>
 <div id="plots-4" class="section level3 unnumbered">
@@ -1057,12 +1057,12 @@ final_table_ordered &lt;- final_table %&gt;%
 print(final_table_ordered)</code></pre>
 <pre><code>## # A tibble: 6 × 4
 ##   Measure            `No Support` `GIS Support` `AI Support`
-##   &lt;chr&gt;              &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;       
-## 1 Mental_demand      4.05 (0.3)   4 (0.4)       4.2 (0.4)   
-## 2 Physical_demand    2.2 (0.3)    2.55 (0.3)    2.55 (0.3)  
-## 3 Temporal_demand    4.25 (0.4)   3.65 (0.4)    4.35 (0.4)  
-## 4 Performance_demand 4.1 (0.3)    5.15 (0.3)    4.65 (0.3)  
-## 5 Effort_demand      4.5 (0.3)    3.95 (0.4)    3.95 (0.2)  
+##   &lt;chr&gt;              &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;
+## 1 Mental_demand      4.05 (0.3)   4 (0.4)       4.2 (0.4)
+## 2 Physical_demand    2.2 (0.3)    2.55 (0.3)    2.55 (0.3)
+## 3 Temporal_demand    4.25 (0.4)   3.65 (0.4)    4.35 (0.4)
+## 4 Performance_demand 4.1 (0.3)    5.15 (0.3)    4.65 (0.3)
+## 5 Effort_demand      4.5 (0.3)    3.95 (0.4)    3.95 (0.2)
 ## 6 Frustration_demand 3.05 (0.4)   2 (0.3)       2.2 (0.3)</code></pre>
 </div>
 <div id="analysis" class="section level3 unnumbered">
